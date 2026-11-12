@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f7f8fc" />
+  <meta name="description" content="ISUBIRAMO — your study revision hub for books, past papers and video tutorials." />
+  <title>ISUBIRAMO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="#" id="homeLink" aria-label="ISUBIRAMO home">
+          <span class="brand-mark"><i data-lucide="graduation-cap"></i></span>
+          <span class="brand-name">ISUBIRAMO<span class="brand-dot">.</span><small>STUDY SPACE</small></span>
+        </a>
+
+        <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+          <button class="nav-link active" data-tab="books"><i data-lucide="book-open"></i><span>Books</span></button>
+          <button class="nav-link" data-tab="papers"><i data-lucide="file-text"></i><span>Past papers</span></button>
+          <button class="nav-link" data-tab="videos"><i data-lucide="play-square"></i><span>Videos</span></button>
+          <button class="nav-link" data-tab="favorites"><i data-lucide="bookmark"></i><span>Saved</span></button>
+        </nav>
+
+        <div class="topbar-actions">
+          <button class="icon-button" id="themeToggle" aria-label="Toggle theme" title="Toggle theme"><i data-lucide="moon"></i></button>
+          <button class="admin-button" id="adminBtn" type="button"><i data-lucide="lock-keyhole"></i><span>Admin</span></button>
+          <button class="mobile-menu-button" id="mobileMenuBtn" aria-label="Open navigation"><i data-lucide="menu"></i></button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="hero">
+        <div class="hero-glow hero-glow-one"></div>
+        <div class="hero-glow hero-glow-two"></div>
+        <div class="container hero-content">
+          <div class="hero-copy">
+            <div class="eyebrow"><span class="eyebrow-dot"></span> YOUR LEARNING, ORGANIZED</div>
+            <h1>Make every study<br />session <span>count.</span></h1>
+            <p>Everything you need to prepare, practise and move forward — all in one place.</p>
+            <div class="search-wrap">
+              <i data-lucide="search"></i>
+              <input id="globalSearch" type="search" placeholder="Search books, subjects, papers or videos..." autocomplete="off" />
+              <kbd>⌘ K</kbd>
+            </div>
+            <div class="hero-note"><i data-lucide="sparkles"></i> Find your next learning resource</div>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+            <div class="art-card art-card-main">
+              <div class="art-card-top"><span class="art-mini-icon"><i data-lucide="book-open"></i></span><span class="art-pill">STUDY MODE</span></div>
+              <div class="art-lines"><span></span><span></span><span></span></div>
+              <div class="art-progress"><span></span></div>
+              <div class="art-card-bottom"><span>Keep learning</span><i data-lucide="arrow-up-right"></i></div>
+            </div>
+            <div class="floating-icon floating-book"><i data-lucide="book-marked"></i></div>
+            <div class="floating-icon floating-play"><i data-lucide="play"></i></div>
+            <div class="floating-icon floating-star"><i data-lucide="star"></i></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="container dashboard-section">
+        <div class="stats-grid" id="statsGrid">
+          <article class="stat-card"><div class="stat-icon purple"><i data-lucide="library"></i></div><div><span class="stat-label">Total resources</span><strong id="totalCount">0</strong><small>Across your library</small></div></article>
+          <article class="stat-card"><div class="stat-icon orange"><i data-lucide="book-open"></i></div><div><span class="stat-label">Books</span><strong id="bookCount">0</strong><small>Learning materials</small></div></article>
+          <article class="stat-card"><div class="stat-icon blue"><i data-lucide="file-check-2"></i></div><div><span class="stat-label">Past papers</span><strong id="paperCount">0</strong><small>Practice and prepare</small></div></article>
+          <article class="stat-card"><div class="stat-icon pink"><i data-lucide="video"></i></div><div><span class="stat-label">Video lessons</span><strong id="videoCount">0</strong><small>Watch and understand</small></div></article>
+        </div>
+
+        <div class="section-heading">
+          <div>
+            <div class="section-kicker" id="sectionKicker">YOUR LIBRARY</div>
+            <h2 id="sectionTitle">Explore study materials</h2>
+            <p id="sectionDescription">Choose your class to discover books, past papers and video lessons.</p>
+          </div>
+          <div class="section-tools">
+            <label class="select-wrap"><i data-lucide="sliders-horizontal"></i><select id="sortSelect" aria-label="Sort resources"><option value="newest">Recently added</option><option value="az">Name: A to Z</option><option value="za">Name: Z to A</option></select></label>
+          </div>
+        </div>
+
+        <div class="breadcrumb" id="breadcrumb" aria-live="polite"></div>
+        <div class="filter-row" id="filterRow">
+          <div class="filter-label"><i data-lucide="layers-3"></i> Browse by class</div>
+          <div class="class-chips" id="classChips"></div>
+        </div>
+
+        <div class="content-grid" id="contentGrid"></div>
+
+        <div class="empty-state hidden" id="emptyState">
+          <div class="empty-illustration"><i data-lucide="folder-open"></i></div>
+          <h3 id="emptyTitle">Nothing here yet</h3>
+          <p id="emptyText">Resources will appear here once they have been added.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <a class="footer-brand" href="#" id="footerHome"><span class="brand-mark small-mark"><i data-lucide="graduation-cap"></i></span> ISUBIRAMO<span class="brand-dot">.</span></a>
+        <p>Built to make learning easier. Keep showing up.</p>
+        <span>© <span id="year"></span> ISUBIRAMO</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Resource preview -->
+  <div class="modal-backdrop" id="previewModal" role="dialog" aria-modal="true" aria-labelledby="previewTitle">
+    <div class="modal modal-large">
+      <div class="modal-header">
+        <div class="modal-heading"><span class="modal-eyebrow">RESOURCE PREVIEW</span><h2 id="previewTitle">Preview</h2></div>
+        <button class="icon-button close-modal" data-close="previewModal" aria-label="Close preview"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-content" id="previewBody"></div>
+      <div class="modal-footer" id="previewFooter"></div>
+    </div>
+  </div>
+
+  <!-- Admin sign-in -->
+  <div class="modal-backdrop" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+    <div class="modal login-modal">
+      <div class="modal-header">
+        <div class="modal-heading"><span class="modal-eyebrow">RESTRICTED AREA</span><h2 id="loginTitle">Administrator sign in</h2></div>
+        <button class="icon-button close-modal" data-close="loginModal" aria-label="Close sign in"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-content login-content">
+        <div class="login-symbol"><i data-lucide="shield-check"></i></div>
+        <p class="login-description">Sign in with the administrator password to manage the ISUBIRAMO library.</p>
+        <form id="loginForm">
+          <label class="field"><span>Admin password</span><input id="adminPassword" type="password" autocomplete="current-password" placeholder="Enter admin password" required /></label>
+          <p class="form-message" id="loginMessage" role="status"></p>
+          <button class="button button-primary full-button" type="submit"><i data-lucide="log-in"></i> Sign in</button>
+        </form>
+        <p class="storage-note"><i data-lucide="info"></i> Your administrator account is checked securely by the ISUBIRAMO server.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin / resource manager -->
+  <div class="modal-backdrop" id="adminModal" role="dialog" aria-modal="true" aria-labelledby="adminTitleHeading">
+    <div class="modal modal-admin">
+      <div class="modal-header">
+        <div class="modal-heading"><span class="modal-eyebrow">LIBRARY MANAGEMENT</span><h2 id="adminTitleHeading">Manage resources</h2></div>
+        <button class="icon-button close-modal" data-close="adminModal" aria-label="Close manager"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-content">
+        <div class="admin-intro"><span class="admin-intro-icon"><i data-lucide="wand-sparkles"></i></span><div><strong>Grow your study library</strong><p>Add a book, past paper or video for students to access.</p></div></div>
+        <form id="resourceForm">
+          <div class="form-grid">
+            <label class="field"><span>Resource type</span><select id="adminType" required><option value="books">Book</option><option value="papers">Past paper</option><option value="videos">Video lesson</option></select></label>
+            <label class="field"><span>Class / level</span><select id="adminClass" required><option>S1</option><option>S2</option><option>S3</option><option>S4</option><option>S5</option><option>S6</option></select></label>
+          </div>
+          <label class="field"><span>Resource title</span><input id="adminTitle" type="text" maxlength="100" placeholder="e.g. Mathematics — Algebra" required /></label>
+          <label class="field"><span>Subject</span><input id="adminSubject" type="text" maxlength="60" placeholder="e.g. Mathematics" /></label>
+          <label class="field" id="pdfUploadField"><span id="resourceUrlLabel">Upload PDF file</span><input id="adminFile" type="file" accept="application/pdf,.pdf" /><small class="field-hint" id="resourceUrlHint">Choose a PDF book or past paper from your computer. Maximum file size: 100 MB.</small></label>
+          <label class="field hidden" id="videoUrlField"><span>YouTube or Vimeo link</span><input id="adminUrl" type="url" placeholder="https://www.youtube.com/watch?v=..." /><small class="field-hint">Paste a YouTube or Vimeo lesson URL. It will appear in the video player.</small></label>
+          <label class="field"><span>Description <em>Optional</em></span><textarea id="adminDesc" rows="3" maxlength="240" placeholder="Add a short description to help students..."></textarea></label>
+          <div class="form-message" id="formMessage" role="status"></div>
+          <button class="button button-primary full-button" type="submit"><i data-lucide="plus-circle"></i> Add to library</button>
+        </form>
+        <div class="manager-divider"></div>
+        <div class="manager-list-heading"><div><span class="modal-eyebrow">CONTENT CONTROL</span><h3>Recently added</h3></div><div class="manager-heading-actions"><span class="manager-count" id="managerCount">0 items</span><button class="button button-soft button-compact" id="adminLogoutBtn" type="button"><i data-lucide="log-out"></i> Sign out</button></div></div>
+        <div class="manager-list" id="managerList"></div>
+        <button class="button button-danger-outline full-button clear-library" id="clearAllBtn"><i data-lucide="trash-2"></i> Clear entire library</button>
+        <p class="storage-note"><i data-lucide="info"></i> Files and resource details are stored on the ISUBIRAMO server and shared with visitors.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
+  <script src="app.js"></script>
+</body>
+</html>
